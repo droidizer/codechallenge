@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.blackbelt.bindings.recyclerviewbindings.LayoutManagers"/>
+
+        <variable
+                name="repositoryViewModel"
+                type="com.guru.xapochallenge.ui.repository.viewmodel.RepositoryViewModel"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.blackbelt.bindings.recyclerviewbindings.AndroidBindableRecyclerView
+                    items="@{repositoryViewModel.repositories}"
+                    itemViewBinder="@{repositoryViewModel.templatesForObjects}"
+                    layoutManager="@{LayoutManagers.linear()}"
+                    itemDecoration="@{repositoryViewModel.itemDecoration}"
+                    pageDescriptor="@={repositoryViewModel.nextPage}"
+                    onItemClickListener="@{repositoryViewModel.itemClickListener}"
+                    android:id="@+id/repository_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <ProgressBar xmlns:tools="http://schemas.android.com/tools"
+                         toVisibility="@{repositoryViewModel.firstLoading}"
+                         android:id="@+id/progress_bar"
+                         style="@style/Widget.AppCompat.ProgressBar"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_margin="10dp"
+                         android:indeterminate="true"
+                         tools:ignore="MissingPrefix"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
